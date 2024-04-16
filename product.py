@@ -19,6 +19,9 @@ class Product:
     def get_on_sale(self):
         return self.__on_sale
 
+    def set_sale_percentage(self, persentage):
+        self.__sale_percentage = persentage
+
     def get_sale_percentage(self):
         return self.__sale_percentage
 
