@@ -1,7 +1,7 @@
-from account import *
 from product import *
 from user import *
 from webShop import *
+import PySimpleGUI as sg
 
 ws = Webshop("img\circle_logo.png", "This is a test shop", "Test shop")
 
@@ -26,3 +26,11 @@ print("buying")
 print(ws.get_accounts()[0].get_user().get_bank_balance())
 ws.get_accounts()[0].buy()
 print(ws.get_accounts()[0].get_user().get_bank_balance())
+
+layout = [
+    [sg.Image(ws.get_logo()), sg.Text(ws.get_name()), sg.Text(), sg.Button(image_filename= "img\search_but.png", key= "search")]
+]
+
+window = sg.Window(ws.get_name(), layout, size= (1000,600))
+
+event, values = window.read()
