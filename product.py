@@ -24,3 +24,10 @@ class Product:
 
     def getTags(self):
         return self.__tags
+
+class Textile_product:
+    def __init__(self, material):
+        self.__material = material
+
+    def getMaterial(self):
+        return self.__material
