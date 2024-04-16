@@ -6,30 +6,30 @@ class User:
         self.__bank_balance = bank_balance
         self.__card_info = card_info
 
-    def getName(self):
+    def get_name(self):
         return self.__name
 
-    def getContact_info(self):
+    def get_contact_info(self):
         return self.__contact_info
 
-    def getAddress(self):
+    def get_address(self):
         return self.__address
 
-    def getBank_balance(self):
+    def get_bank_balance(self):
         return self.__bank_balance
 
-    def getCard_info(self):
+    def get_card_info(self):
         return self.__card_info
 
     def change_balance(self, amount):
         self.__bank_balance += amount
 
-class Business_user(User):
+class Buisness_user(User):
     def __init__(self, cvr, name, contact_info, address, bank_balance, card_info):
         super().__init__(name= name, contact_info= contact_info, address= address, bank_balance= bank_balance, card_info= card_info)
         self.__cvr = cvr
 
-    def getCVR(self):
+    def get_CVR(self):
         return self.__cvr
 
 class Private_user(User):
@@ -37,5 +37,5 @@ class Private_user(User):
         super().__init__(name= name, contact_info= contact_info, address= address, bank_balance= bank_balance, card_info= card_info)
         self.__contacts = contacts
 
-    def getContacts(self):
+    def get_contacts(self):
         return self.__contacts

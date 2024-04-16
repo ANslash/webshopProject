@@ -2,11 +2,11 @@ import account
 
 class Webshop:
 
-    def __init__(self, inventory, logo, info, accDB, name):
-        self.__inventory: list = inventory
+    def __init__(self, logo, info, name):
+        self.__inventory: list = []
         self.__logo: str = logo
         self.__info: str = info
-        self.__accDB: list = accDB
+        self.__accDB: list = []
         self.__name: str = name
 
     def get_inventory(self):
@@ -31,8 +31,10 @@ class Webshop:
 
         match type:
             case "basic":
-                new_account = account.Basic_account(user, username, password)
+                is_premium = int(input("Is this user permuim? "))
+                new_account = account.Basic_account(user, username, password, is_premium)
             case "buisness":
-                new_account = account.Buisness_account(user, username, password)
+                focus = input("Buisness focus: ")
+                new_account = account.Buisness_account(user, username, password, focus)
 
         self.__accDB.append(new_account)
