@@ -39,9 +39,34 @@ class Product:
         self.__tags.remove(tag)
 
 class Textile_product (Product):
-    def __init__(self, material, name, by, rating, price, sale, percentage, tags):
-        super().__init__(name= name, produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= tags)
+    def __init__(self, material, name, by, rating, price, sale, percentage):
+        super().__init__(name= name, produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= ["Textile"])
         self.__material: str = material
 
     def get_material(self):
         return self.__material
+
+class Electronics (Product):
+    def __init__(self, components, name, by, rating, price, sale, percentage):
+        super().__init__(name= name, produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= ["Electronic"])
+        self.__components: list = components
+
+    def get_components(self):
+        return self.__components
+
+class Computer (Electronics):
+    def __init__(self, component, name, by, rating, price, sale, percentage, system):
+        super().__init__(name= name, by= by, rating= rating, price= price, sale= sale, percentage= percentage, components= component)
+        self.add_tag("Computer")
+        self.__operatingsystem = system
+
+    def get_system(self):
+        return self.__operatingsystem
+
+class Toys (Product):
+    def __init__(self, age_range, name, by, rating, price, sale, percentage):
+        super().__init__(name= name, produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= ["Toy"])
+        self.__age_range: tuple = age_range
+
+    def get_age_range(self):
+        return self.__age_range
