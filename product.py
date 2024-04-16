@@ -1,11 +1,11 @@
 class Product:
     def __init__(self, produced_by, rating, price, on_sale, sale_percentage, tags):
-        self.__produced_by = produced_by
-        self.__rating = rating
-        self.__price = price
-        self.__on_sale = on_sale
-        self.__sale_percentage = sale_percentage
-        self.__tags = tags
+        self.__produced_by: str = produced_by
+        self.__rating: int = rating
+        self.__price: float = price
+        self.__on_sale: bool = on_sale
+        self.__sale_percentage: float = sale_percentage
+        self.__tags: list = tags
 
     def get_produced_by(self):
         return self.__produced_by
@@ -25,10 +25,16 @@ class Product:
     def get_tags(self):
         return self.__tags
 
+    def add_tag(self, tag):
+        self.__tags.append(tag)
+
+    def remove_tag(self, tag):
+        self.__tags.remove(tag)
+
 class Textile_product (Product):
     def __init__(self, material, by, rating, price, sale, percentage, tags):
         super().__init__(produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= tags)
-        self.__material = material
+        self.__material: str = material
 
     def get_material(self):
         return self.__material
