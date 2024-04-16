@@ -1,5 +1,5 @@
 class Account:
-    def __init__(self, user, username, password, ):
+    def __init__(self, user, username, password):
         self.__user: User = user
         self.__username: str = username
         self.__password: str = password
