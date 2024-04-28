@@ -7,7 +7,7 @@ class Account:
         self.__shopping_cart: list = []
         self.__shopping_history: dict = {}
 
-    def remove_Item(self, item_index):
+    def remove_item(self, item_index):
         self.__shopping_cart.pop(item_index)
 
     def get_shoppingcart(self):
@@ -71,7 +71,7 @@ class Basic_account (Account):
             self.get_user().change_balance(-total)
             different_products = len(self.get_shoppingcart())
             for i in range(different_products):
-                self.remove_Item(0)
+                self.remove_item(0)
         else:
             print("NOT ENOUGH BALANCE TO COMPLETE PURCHASE!!!")
 
@@ -100,7 +100,7 @@ class Buisness_account (Account):
             self.get_user().change_balance(-total)
             different_product = len(self.get_shoppingcart())
             for i in range(different_product):
-                self.remove_Item(0)
+                self.remove_item(0)
         else:
             print("NOT ENOUGH BALANCE TO COMPLETE PURCHASE!!!")
 

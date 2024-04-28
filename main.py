@@ -102,7 +102,15 @@ while True:
                 amount = int(sg.popup_get_text("Amount:"))
                 ws.get_accounts()[0].add_to_shoppingcart(chosen_item, amount)
     elif event == "basket":
-        print(display_basket(ws.get_accounts()[0]))
+        choise = display_basket(ws.get_accounts()[0])
+        if choise == "buy":
+            ws.get_accounts()[0].buy()
+        elif choise != "buy" and choise != None:
+            for i in range (len(ws.get_accounts()[0].get_shoppingcart())):
+                print("-----")
+                print(ws.get_accounts()[0].get_shoppingcart()[i][0].get_name())
+                    #ws.get_accounts()[0].remove_item(i)
+
 
 
 
