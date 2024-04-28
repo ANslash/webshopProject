@@ -70,3 +70,5 @@ class Toys (Product):
 
     def get_age_range(self):
         return self.__age_range
+
+class Baby
