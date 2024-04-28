@@ -31,7 +31,16 @@ class Account:
         return self.__username
 
     def add_to_shoppingcart(self, product, amount):
-        self.__shopping_cart.append((product, amount))
+        index = 0
+        already_in_cart = False
+        for item in self.get_shoppingcart():
+            if item[0].get_name() == product.get_name():
+                already_in_cart = True
+                for i in range (amount):
+                    self.increase_item_amount(index)
+            index += 1
+        if not already_in_cart:
+            self.__shopping_cart.append([product, amount])
 
     def get_user(self):
         return self.__user
