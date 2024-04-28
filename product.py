@@ -9,7 +9,7 @@ class Product:
         self.__tags: list = tags
 
     def __str__(self):
-        return self.n
+        return self.__name
 
     def get_produced_by(self):
         return self.__produced_by
@@ -71,4 +71,11 @@ class Toys (Product):
     def get_age_range(self):
         return self.__age_range
 
-class Baby
+class Lego (Toys):
+    def __init__(self, franchise, age_range, name, by, rating, price, sale, percentage):
+        super().__init__(franchise= franchise, age_range= age_range, name= name, produced_by= by, rating= rating, price= price, on_sale= sale, sale_percentage= percentage, tags= ["Toy"])
+        self.__franchise
+        self.__age_range: tuple = age_range
+
+    def get_franchise(self):
+        return self.__franchise
