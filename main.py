@@ -34,26 +34,54 @@ print(ws.get_accounts()[0].get_user().get_bank_balance())
 def show_inventory():
     inventory = []
     for i in range(len(ws.get_inventory())):
-        inventory.append(sg.Button(ws.get_inventory()[len(ws.get_inventory()) - (i + 1)].get_name()))
+        inventory.append(sg.Button(ws.get_inventory()[len(ws.get_inventory()) - (i + 1)].get_name(), key= ws.get_inventory()[len(ws.get_inventory()) - (i + 1)].get_name()))
     return inventory
+
+def show_profile(acc):
+    layout = []
+    layout.append([sg.Image("img\profile.png")])
+    layout.append([sg.Text(acc.get_username())])
+    layout.append([sg.Text(acc.get_user().get_bank_balance()), sg.Button(button_text= "Add balance", key= "balance")])
+    window = sg.Window(title= "Profile info", layout= layout, size= (1600,800))
+    event = window.read(close= True)
+
+    if event[0] == "balance":
+        amount = None
+        while amount == None or amount < 0:
+            amount = int(sg.popup_get_text("Add to balance"))
+            if amount < 0:
+                sg.popup("The amount can't be negative!")
+        acc.get_user().change_balance(amount)
 
 def show_sales():
     sales = []
     for item in ws.get_inventory():
         if item.get_on_sale():
-            sales.append(sg.Button(item.get_name()))
+            sales.append(sg.Button(item.get_name(), key= item.get_name()))
     return sales
 
-def personal_search(tag):
+"""Displays all products that contains the given key in their tags or shares a name with the given key"""
+def personal_search(key):
     valid_items = [[]]
 
     for item in ws.get_inventory():
-        if tag in item.get_tags() or tag == item.get_name():
+        if key in item.get_tags() or key == item.get_name():
             valid_items[0].append(sg.Button(button_text= item.get_name()))
-    window = sg.Window(title= f"Search for: {tag}", layout= valid_items, size= (1600, 800))
+    window = sg.Window(title= f"Search for: {key}", layout= valid_items, size= (1600, 800))
     event = window.read(close= True)
     return event[0]
 
+def show_item(event):
+    chosen_item = None
+    for item in ws.get_inventory():
+        if item.get_name() == event:
+            chosen_item = item
+    if sg.popup_yes_no(f"Add to cart:\n"
+                       f"{chosen_item.get_name()}"
+                       f"\n{chosen_item.get_price()}"
+                       f"\n{chosen_item.get_rating()}", title=chosen_item.get_name()) == "Yes":
+        amount = int(sg.popup_get_text("Amount:"))
+        ws.get_accounts()[0].add_to_shoppingcart(chosen_item, amount)
 def display_basket(acc):
     basket = []
     total_price = 0
@@ -65,11 +93,6 @@ def display_basket(acc):
     window = sg.Window(title= "Shopping cart", layout= basket, size= (1600, 800))
     event = window.read(close= True)
     return event[0]
-
-
-
-print(ws.get_inventory())
-print(show_inventory())
 
 layout = [
     [sg.Image(ws.get_logo()), sg.Text(ws.get_name()), sg.Button(image_filename= "img\search_but.png", key= "search"), sg.Button(image_filename= "img\profile.png", key= "profile"), sg.Button(image_filename= "img\shopping_basket.png", key= "basket")],
@@ -84,32 +107,27 @@ window = sg.Window(ws.get_name(), layout, size= (1000,600))
 while True:
     event, values = window.read()
 
-    print(event)
-
     if event == sg.WINDOW_CLOSED:
         break
     elif event == "search":
         looking_for = sg.popup_get_text("")
         item_name = personal_search(looking_for)
         if item_name != None:
-            for item in ws.get_inventory():
-                if item.get_name() == item_name:
-                    chosen_item = item
-            if sg.popup_yes_no(f"Add to cart:\n"
-                            f"{chosen_item.get_name()}"
-                            f"\n{chosen_item.get_price()}"
-                            f"\n{chosen_item.get_rating()}", title= chosen_item.get_name()) == "Yes":
-                amount = int(sg.popup_get_text("Amount:"))
-                ws.get_accounts()[0].add_to_shoppingcart(chosen_item, amount)
+            show_item(item_name)
     elif event == "basket":
         choise = display_basket(ws.get_accounts()[0])
         if choise == "buy":
             ws.get_accounts()[0].buy()
         elif choise != "buy" and choise != None:
             for i in range (len(ws.get_accounts()[0].get_shoppingcart())):
-                print("-----")
-                print(ws.get_accounts()[0].get_shoppingcart()[i][0].get_name())
-                    #ws.get_accounts()[0].remove_item(i)
+                if ws.get_accounts()[0].get_shoppingcart()[i][0].get_name() == choise:
+                    ws.get_accounts()[0].remove_item(i)
+    elif event == "profile":
+        show_profile(ws.get_accounts()[0])
+    else:
+        print(event)
+        show_item(event)
+
 
 
 
