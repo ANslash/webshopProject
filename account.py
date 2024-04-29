@@ -104,6 +104,4 @@ class Buisness_account (Account):
         else:
             print("NOT ENOUGH BALANCE TO COMPLETE PURCHASE!!!")
 
-    User
-
 
