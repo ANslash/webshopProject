@@ -7,14 +7,25 @@ ws = Webshop("img\circle_logo.png", "This is a test shop", "Test shop")
 
 b_usr = Buisness_user("84Fg123", "Arla", {"e-mail": "arla@gmail.dk", "tlf": "12345678"}, "Rådhuspladsen 1", 1000000, "1234567890")
 
-t_prod = Textile_product("Nylon", "Pants", "Polo", 4, 10, False, 0, ["Textile"])
-sweater_prod = Textile_product("Wool", "Sweater", "Grannt", 10, 32, True, 12, ["Textile"])
-m_prod = Product("Milk", "Arla", 4, 14, False, 0, ["Mælk"])
+t_shirt = Textile_product("cotton", "t-shirt with print", "Jack & Jones", 7, 49.99, False, 0)
+jeans = Textile_product("denim", "fashionable jeans", "H&M", 6, 299.99, True, 15)
+sweater = Textile_product("wool", "comfy sweater", "Only & Sons", 9, 199.99, False, 0)
+under_wear = Textile_product("cotton/polyester", "short underpants", "H&M", 6, 89.99, False, 0)
+pc_hardware = Electronics("GPU", "ASUS GeForce RTX 4070 Ti SUPER TUF OC - 16GB GDDR6X RAM", "ASUS", 8, 7999.99, True, 10)
+console = Electronics("Gaming console", "Playstation 5", "Sony", 10, 3999.99, False, 0)
+barbie = Toys((4, 16), "Science Barbie", "Matell", 7, 99.99, True, 25)
+millenium_falcon = Lego("Star Wars", (16, 80), "UCS Millenium Falcon set set number 75192", "The Lego Group", 10, 5999.99, False, 0)
 
 print(f"Inventory: {ws.get_inventory()}")
-ws.add_inventory(t_prod)
-ws.add_inventory(sweater_prod)
-ws.add_inventory(m_prod)
+ws.add_inventory(t_shirt)
+ws.add_inventory(jeans)
+ws.add_inventory(sweater)
+ws.add_inventory(under_wear)
+ws.add_inventory(pc_hardware)
+ws.add_inventory(console)
+ws.add_inventory(barbie)
+ws.add_inventory(millenium_falcon)
+
 print(f"Inventory: {ws.get_inventory()}")
 
 ws.create_new_account("buisness", b_usr, "Arla", "Vi_elsker_ko")
@@ -127,7 +138,6 @@ while True:
     else:
         print(event)
         show_item(event)
-
 
 
 
